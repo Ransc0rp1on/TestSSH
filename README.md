@@ -19,9 +19,9 @@ This script allows users to check the SSH connectivity status of one or more IP 
    git clone <repository_url>
    cd <repository_folder>
    ```
-2. Ensure the script file (`check_ssh.sh`) has execute permissions:
+2. Ensure the script file (`TestSSH.sh`) has execute permissions:
    ```bash
-   chmod +x check_ssh.sh
+   chmod +x TestSSH.sh
    ```
 
 ---
@@ -29,7 +29,7 @@ This script allows users to check the SSH connectivity status of one or more IP 
 ## How to Use
 1. Run the script:
    ```bash
-   ./check_ssh.sh
+   ./TestSSH.sh
    ```
 2. The script will prompt for the following inputs:
    - **IP Address or File Path**: Provide a single IP (e.g., `192.168.1.1`) or a path to a text file (e.g., `IP.txt`) containing a list of IP addresses.
