@@ -3,7 +3,7 @@
 # Function to check SSH connection
 check_ssh_connection() {
     local ip=$1
-    sshpass -p "$PWD" ssh -q -o ConnectTimeout=3 "$USR@$ip" exit
+    sshpass -p "$PWD" ssh -o StrictHostKeyChecking=no -q -o ConnectTimeout=3 "$USR@$ip" exit
     local ret=$?
 
     case $ret in
@@ -12,6 +12,9 @@ check_ssh_connection() {
             ;;
         255)
             echo "$ip - Permission Denied or Connection Timeout"
+            ;;
+        6)
+            echo "$ip - Network Error or IP Unreachable"
             ;;
         5)
             echo "$ip - SSH Port Closed"
@@ -55,7 +58,7 @@ for IP in $IP_LIST; do
     if [[ $AUTH_METHOD == "password" ]]; then
         check_ssh_connection "$IP"
     elif [[ $AUTH_METHOD == "key" ]]; then
-        ssh -q -o ConnectTimeout=3 $SSH_OPTIONS "$USR@$IP" exit
+        ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 $SSH_OPTIONS "$USR@$IP" exit
         ret=$?
 
         case $ret in
@@ -64,6 +67,9 @@ for IP in $IP_LIST; do
                 ;;
             255)
                 echo "$IP - Permission Denied or Connection Timeout"
+                ;;
+            6)
+                echo "$IP - Network Error or IP Unreachable"
                 ;;
             5)
                 echo "$IP - SSH Port Closed"
@@ -75,3 +81,4 @@ for IP in $IP_LIST; do
     fi
 
 done
+     
