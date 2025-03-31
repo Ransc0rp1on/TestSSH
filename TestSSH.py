@@ -91,3 +91,4 @@ def main():
     print(f"\nSummary: Successful logins: {success_count}/{len(ips)}")
 
 if __name__ == "__main__":
+    main()
